@@ -10,13 +10,18 @@ CREATE TABLE items (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+```
 
+### Stock Logs Table
+
+```sql
 CREATE TABLE stock_logs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     item_id UUID REFERENCES items(id) ON DELETE CASCADE,
-    type VARCHAR(3) CHECK (type IN ('IN', 'OUT')),
+    'type' VARCHAR(3) CHECK (type IN ('IN', 'OUT')),
+    qty_before INT NOT NULL,
+    qty_after INT NOT NULL,
     qty INT NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 ```

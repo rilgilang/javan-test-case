@@ -1,3 +1,20 @@
+# Overview
+
+Sistem ini adalah API sederhana untuk manajemen inventori barang yang mendukung operasi CRUD (Create, Read, Update, Delete) serta pencatatan perubahan stok secara asinkron.
+
+## Tujuan utama:
+
+1. Mengelola data barang dengan efisien
+2. Menjaga konsistensi stok (tidak boleh minus)
+3. Mencatat histori perubahan stok tanpa mengganggu performa utama sistem
+
+## Goals
+
+1. Menyediakan API CRUD untuk barang
+2. Menjamin stok tidak pernah bernilai negatif
+3. Menyediakan sistem logging perubahan stok secara cepat (asynchronous)
+4. Mudah di-deploy dan di-maintain
+
 # Inventory Management System API
 
 A RESTful API for managing inventory items and stock levels with asynchronous stock updates using message brokers.
@@ -196,8 +213,38 @@ curl -X PUT http://localhost:3000/item/{id}/stock/reduce \
 }
 ```
 
+# Get Stock Logs
+
+```
+    curl -X GET 'http://localhost:3000/item/stock/logs?type=IN&name=sarimi&start_date=30-03-2026&end_date=30-02-2026&page=1&per_page=10'
+```
+
+200 OK
+
+```
+{
+    "status" : "Ok",
+    "data" : [
+        {
+            "id" : "uuid",
+            "name"  : "mie goreng",
+            "stock" : 1000,
+            "created_at" : "2024-01-01T00:00:00Z",
+            "updated_at" : "2024-01-01T00:00:00Z"
+        }
+    ],
+    "message" : "ok",
+    "meta" : {
+        "page": 1,
+        "per_page": 10
+    }
+}
+```
+
 ## Tech Stack
 
 - **Runtime**: Golang
+- **CI/CD**: Github Action
+- **Deployment**: Docker
 - **Database**: PostgreSQL
 - **Message Broker**: RabbitMQ / Redis / NATS
