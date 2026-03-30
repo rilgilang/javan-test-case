@@ -9,11 +9,13 @@ A RESTful API for managing inventory items and stock levels with asynchronous st
 - **Stock History**: Automatic logging of all stock changes
 - **Asynchronous Updates**: Stock updates processed via message broker (RabbitMQ/Redis/NATS)
 
-# ============================================
+# EndPoint
+
+# ========================================
 
 # ITEM MANAGEMENT
 
-# ============================================
+# ========================================
 
 # Create Item
 
@@ -44,11 +46,11 @@ curl -X PUT http://localhost:3000/item/{id} \
 
 curl -X DELETE http://localhost:3000/item/{id}
 
-# ============================================
+# ========================================
 
 # STOCK MANAGEMENT
 
-# ============================================
+# ========================================
 
 # Increase Stock
 
