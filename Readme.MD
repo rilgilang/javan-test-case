@@ -1,143 +1,16 @@
-Item Management
-Get Item
-Get Item Detail
-Create Item
-Update Item
-Delete Item
+# Inventory Management System API
 
-Stock Management
-Update Stock
+A RESTful API for managing inventory items and stock levels with asynchronous stock updates using message brokers.
 
-Stock History
-Stock history log
+## Features
 
-Items
-ID uuid
-Name varchar
-Stock numeric
-CreatedAt
-UpdatedAt
+- **Item Management**: Create, read, update, and delete inventory items
+- **Stock Management**: Increase or decrease stock with validation
+- **Stock History**: Automatic logging of all stock changes
+- **Asynchronous Updates**: Stock updates processed via message broker (RabbitMQ/Redis/NATS)
 
-Stock Log
-ID uuid
-ItemID uuid
-Type Enun(In, Out)
-Qty int
-CreatedAt
-UpdatedAt
+## Tech Stack
 
-// Create
-POST /item
-request
-{
-"name" : "mie goreng",
-"stock" : 1000
-}
-
-// GET ALL
-GET /item
-response
-[
-{
-"id" : "uuid",
-"name" : "mie goreng",
-"stock" : 1000,
-"created_at" : timestampz,
-"Updated_at" : timestampz,
-}
-]
-
-// Get Item Detail
-GET /item/:id
-response
-{
-"id" : "uuid",
-"name" : "mie goreng",
-"stock" : 1000,
-"created_at" : timestampz,
-"Updated_at" : timestampz,
-}
-
-// Update Item
-PUT /item/:id
-request
-{
-"name" : "mie goreng",
-}
-
-response
-{
-"data": {
-"id" : "uuid",
-"name" : "mie goreng",
-"stock" : 1000,
-"created_at" : timestampz,
-"Updated_at" : timestampz,
-}
-"message": "ok"
-}
-
-// DELETE Item
-DELETE /item/:id
-
-response
-{
-"status": "ok",
-"message": "success"
-}
-
-// STOCK MANAGEMENT
-
-//Add stock
-POST /item/:id/stock/increase
-request
-{
-"qty" : 20
-}
-
-response
-{
-"data": {
-"id" : "uuid",
-"name" : "mie goreng",
-"stock" : 1000,
-"created_at" : timestampz,
-"Updated_at" : timestampz,
-},
-"message": "ok"
-}
-
-//Reduce stock
-POST /item/:id/stock/reduce
-request
-{
-"qty" : 20
-}
-
-response
-200
-{
-"data": {
-"id" : "uuid",
-"name" : "mie goreng",
-"stock" : 1000,
-"created_at" : timestampz,
-"Updated_at" : timestampz,
-},
-"message": "ok"
-}
-
-// Stock tidak boleh minus
-400
-{
-"status": "error",
-"message" : "stock tidak boleh minus",
-}
-
-Flow:
-
-1. Update stock
-   ketika update stock akan disimpan ke message broker yang kemudian akan diconsume
-   dan di update secara asynchronous
-   (contoh broker: RabbitMQ, Redis, NATS)
-2.
+- **Runtime**: Golang
+- **Database**: PostgreSQL
+- **Message Broker**: RabbitMQ / Redis / NATS
