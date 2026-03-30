@@ -1,3 +1,10 @@
+## Kelompok 2
+
+    - Gilang Sukma Wijaya
+    - Syaiful Maulana
+    - Eko Prasetio
+    - Karuniawan Suharta
+
 # Overview
 
 Sistem ini adalah API sederhana untuk manajemen inventori barang yang mendukung operasi CRUD (Create, Read, Update, Delete) serta pencatatan perubahan stok secara asinkron.
