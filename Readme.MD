@@ -12,17 +12,17 @@ Stock History
 Stock history log
 
 Items
-ID
-Name
-Stock
+ID uuid
+Name varchar
+Stock numeric
 CreatedAt
 UpdatedAt
 
 Stock Log
-ID
-ItemID
+ID uuid
+ItemID uuid
 Type Enun(In, Out)
-Qty
+Qty int
 CreatedAt
 UpdatedAt
 
